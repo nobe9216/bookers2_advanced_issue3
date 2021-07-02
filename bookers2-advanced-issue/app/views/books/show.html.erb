@@ -21,10 +21,11 @@
           <% if @book.user == current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
             <td><%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
+            <td>コメント件数：<%= @book.post_comments.count %></td>
           <% end %>
         </tr>
-        <tr><%= render 'books/post_comment', book: @book, post_comment: @post_comment %></tr>
       </table>
+      <table class='table'><%= render 'books/post_comment', book: @book, post_comment: @post_comment %></table>
     </div>
   </div>
 </div>
