@@ -1,20 +1,22 @@
-<table class="comments">
-  <tr>
-<% book.post_comments.each do |post_comment| %>
-  <td>
-    <%= attachment_image_tag book.user, :profile_image, size: "50x50", fallback: "no-image-icon.jpg" %><br>
-    <%= post_comment.user.name %>
-  </td>
-  <td>
-    <%= post_comment.comment %>
-    <%= link_to 'Destroy', book_post_comment_path(book), method: :delete, class: "btn btn-sm btn-danger" %>
-  </td>
-<% end %>
-  </tr>
+<table class="comments" 'container'>
+  <% book.post_comments.each do |post_comment| %>
+    <tr class='row'>
+      <td class='col-md-3'>
+        <%= attachment_image_tag book.user, :profile_image, size: "50x50", fallback: "no-image-icon.jpg" %><br>
+        <%= post_comment.user.name %>
+      </td>
+      <td class='col-md-4'>
+        <%= post_comment.comment %>
+      </td>
+      <td class='col-md-5'>
+        <%= link_to 'Destroy', book_post_comment_path(book, post_comment), method: :delete, class: "btn btn-sm btn-danger" %>
+      </td>
+    </tr>
+  <% end %>
 </table>
 <table class="new-comment">
-<%= form_with(model:[book, post_comment], local: true) do |f| %>
-  <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-  <%= f.submit "送信する" %>
-<% end %>
+  <%= form_with(model:[book, post_comment], local: true) do |f| %>
+    <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %><br>
+    <%= f.submit "送信する" %>
+  <% end %>
 </table>
